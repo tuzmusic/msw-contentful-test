@@ -1,0 +1,55 @@
+Arguments: 
+  /Users/jonathantuzman/.nvm/versions/node/v16.17.1/bin/node /usr/local/bin/yarn add -D msw
+
+PATH: 
+  /Users/jonathantuzman/.local/share/fig/plugins/git-open:/Users/jonathantuzman/.nvm/versions/node/v16.17.1/bin:/usr/local/bin:/System/Cryptexes/App/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Library/Apple/usr/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin:/Users/jonathantuzman/dev/butcherbox/storefront-remix/node_modules/.bin:/Users/jonathantuzman/.fig/bin:/Users/jonathantuzman/.local/bin:/Users/jtuzman-superdraft/.nvm/versions/node/v16.15.0/bin:/Users/jtuzman-superdraft/.fig/bin:/Users/jtuzman-superdraft/.local/bin
+
+Yarn version: 
+  1.22.19
+
+Node version: 
+  16.17.1
+
+Platform: 
+  darwin x64
+
+Trace: 
+  Error: ENOENT: no such file or directory, lstat '/Users/jonathantuzman/dev/learning/msw-testing/node_modules/@babel/preset-env/node_modules'
+
+npm manifest: 
+  {
+    "private": true,
+    "sideEffects": false,
+    "scripts": {
+      "build": "remix build",
+      "dev": "remix dev",
+      "start": "remix-serve build",
+      "typecheck": "tsc"
+    },
+    "dependencies": {
+      "@remix-run/css-bundle": "^1.15.0",
+      "@remix-run/node": "^1.15.0",
+      "@remix-run/react": "^1.15.0",
+      "@remix-run/serve": "^1.15.0",
+      "isbot": "^3.6.8",
+      "react": "^18.2.0",
+      "react-dom": "^18.2.0"
+    },
+    "devDependencies": {
+      "@remix-run/dev": "^1.15.0",
+      "@remix-run/eslint-config": "^1.15.0",
+      "@types/react": "^18.0.35",
+      "@types/react-dom": "^18.0.11",
+      "eslint": "^8.38.0",
+      "typescript": "^5.0.4"
+    },
+    "engines": {
+      "node": ">=14.0.0"
+    }
+  }
+
+yarn manifest: 
+  No manifest
+
+Lockfile: 
+  No lockfile
