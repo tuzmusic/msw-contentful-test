@@ -1,15 +1,21 @@
-import type { V2_MetaFunction } from "@remix-run/node";
+import type {LoaderArgs} from "@remix-run/node";
+import {fetch} from "@remix-run/node";
+import {useLoaderData} from "@remix-run/react";
+import {prefix} from "~/msw/msw-handlers";
 
-export const meta: V2_MetaFunction = () => {
-  return [
-    { title: "New Remix App" },
-    { name: "description", content: "Welcome to Remix!" },
-  ];
-};
+export async function loader({ context, params, request }: LoaderArgs) {
+  const result = await fetch("https://my-mock-api.com")
+  return result
+}
+
 
 export default function Index() {
+  const result = useLoaderData<typeof loader>()
+  console.log(result)
+  console.log({prefix})
+
   return (
-    <div style={{ fontFamily: "system-ui, sans-serif", lineHeight: "1.8" }}>
+    <div>
       <h1>Welcome to Remix</h1>
     </div>
   );
