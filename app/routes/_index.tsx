@@ -1,4 +1,3 @@
-import type {LoaderArgs} from "@remix-run/node";
 import {json} from "@remix-run/node";
 import {useLoaderData} from "@remix-run/react";
 import {ApolloClient, InMemoryCache} from "@apollo/client";
@@ -10,7 +9,7 @@ const client = new ApolloClient({
   cache: new InMemoryCache(), headers: {'Authorization': `Bearer ${process.env.CDA_TOKEN}`}
 });
 
-export async function loader({context, params, request}: LoaderArgs) {
+export async function loader() {
   const restResult = await fetch("https://my-mock-api.com")
   const result = await client.query({query})
   return json({graphQl: result?.data, rest: restResult})
@@ -19,6 +18,7 @@ export async function loader({context, params, request}: LoaderArgs) {
 export default function Index() {
   const result = useLoaderData<typeof loader>()
   console.log(result)
+
   return (
     <div>
       <pre>{JSON.stringify(result.graphQl, null, 2)}</pre>
