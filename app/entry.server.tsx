@@ -15,7 +15,7 @@ import { startServer } from "~/msw/msw-server-from-remix-example";
 
 const ABORT_DELAY = 5_000;
 
-startServer()
+// startServer()
 
 export default function handleRequest(
   request: Request,
