@@ -1,9 +1,7 @@
-import type { LoaderArgs } from "@remix-run/node";
-import { fetch} from "@remix-run/node";
+import type {LoaderArgs} from "@remix-run/node";
+import {json} from "@remix-run/node";
 import {useLoaderData} from "@remix-run/react";
-import {CDA_TOKEN, CONTENTFUL_GRAPHQL_ENDPOINT, prefix } from "~/msw/msw-handlers";
-import { ApolloClient, gql, InMemoryCache } from "@apollo/client";
-import { useEffect } from "react";
+import {ApolloClient, gql, InMemoryCache} from "@apollo/client";
 
 const query = gql`
     query {
@@ -15,34 +13,20 @@ const query = gql`
     }
 `
 
-const queryStr ="query{slugCollection{items{name}}}"
-let uri = `${ CONTENTFUL_GRAPHQL_ENDPOINT }/`;
-
 const client = new ApolloClient({
-  uri: uri,
+  uri: process.env.CONTENTFUL_GRAPHQL_ENDPOINT,
   ssrMode: true,
-  cache: new InMemoryCache(),headers:{'Authorization': `Bearer ${CDA_TOKEN}`}
+  cache: new InMemoryCache(),headers:{'Authorization': `Bearer ${process.env.CDA_TOKEN}`}
 });
 
 export async function loader({ context, params, request }: LoaderArgs) {
-  // const restResult = await fetch("https://my-mock-api.com")
-  const restResult = 'not yet'
-  // const str = await client.query({ query })
-  // const parsed = await str.data.json()
-  return json({ restResult, str: '' })
+  const result = await client.query({ query })
+  return json(result.data)
 }
 
 export default function Index() {
   const result = useLoaderData<typeof loader>()
   console.log(result)
-
-  useEffect(() => {
-    console.log('making query on client?', uri)
-    client.query({ query })
-      .then(result => {
-        console.log(result)
-      })
-  }, [])
   return (
     <div>
       <h1>Welcome to Remix</h1>
