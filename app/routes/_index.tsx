@@ -2,12 +2,23 @@ import type {LoaderArgs} from "@remix-run/node";
 import {json} from "@remix-run/node";
 import {useLoaderData} from "@remix-run/react";
 import {ApolloClient, gql, InMemoryCache} from "@apollo/client";
+import {useEffect, useState} from "react";
 
 const query = gql`
-    query {
+    query SlugCollection {
         slugCollection {
             items {
                 name
+            }
+        }
+    }
+`
+
+const query2 = gql`
+    query PageFlexibleLander {
+        pageFlexibleLanderCollection(limit: 1) {
+            items {
+                ...PageFlexibleLander
             }
         }
     }
@@ -30,7 +41,7 @@ export default function Index() {
   console.log(result)
   return (
     <div>
-      <pre>{JSON.stringify(result, null, 2)}</pre>
+      <pre>{JSON.stringify(result.graphQl, null, 2)}</pre>
     </div>
   );
 }
