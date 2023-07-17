@@ -16,12 +16,13 @@ const query = gql`
 const client = new ApolloClient({
   uri: process.env.CONTENTFUL_GRAPHQL_ENDPOINT,
   ssrMode: true,
-  cache: new InMemoryCache(),headers:{'Authorization': `Bearer ${process.env.CDA_TOKEN}`}
+  cache: new InMemoryCache(), headers: {'Authorization': `Bearer ${process.env.CDA_TOKEN}`}
 });
 
-export async function loader({ context, params, request }: LoaderArgs) {
-  const result = await client.query({ query })
-  return json(result.data)
+export async function loader({context, params, request}: LoaderArgs) {
+  const restResult = await fetch("https://my-mock-api.com")
+  const result = await client.query({query})
+  return json({graphQl: result.data, rest: restResult})
 }
 
 export default function Index() {
@@ -29,7 +30,7 @@ export default function Index() {
   console.log(result)
   return (
     <div>
-      <h1>Welcome to Remix</h1>
+      <pre>{JSON.stringify(result, null, 2)}</pre>
     </div>
   );
 }
