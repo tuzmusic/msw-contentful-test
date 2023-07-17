@@ -1,28 +1,8 @@
 import type {LoaderArgs} from "@remix-run/node";
 import {json} from "@remix-run/node";
 import {useLoaderData} from "@remix-run/react";
-import {ApolloClient, gql, InMemoryCache} from "@apollo/client";
-import {useEffect, useState} from "react";
-
-const query = gql`
-    query SlugCollection {
-        slugCollection {
-            items {
-                name
-            }
-        }
-    }
-`
-
-const query2 = gql`
-    query PageFlexibleLander {
-        pageFlexibleLanderCollection(limit: 1) {
-            items {
-                ...PageFlexibleLander
-            }
-        }
-    }
-`
+import {ApolloClient, InMemoryCache} from "@apollo/client";
+import {query} from "~/routes/slugCollectionQuery";
 
 const client = new ApolloClient({
   uri: process.env.CONTENTFUL_GRAPHQL_ENDPOINT,
