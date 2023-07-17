@@ -1,6 +1,6 @@
 import {graphql, rest} from 'msw'
 
- const CONTENTFUL_ENVIRONMENT = "jtuzman-sandbox"
+const CONTENTFUL_ENVIRONMENT = "jtuzman-sandbox"
 
 export const prefix = `${process.env.CONTENTFUL_GRAPHQL_ENDPOINT}/environments/${CONTENTFUL_ENVIRONMENT}/`
 
@@ -9,7 +9,8 @@ export const handlers = [
   rest.get("https://my-mock-api.com", (_, res, ctx) => {
     return res(ctx.status(200), ctx.json({message: "from msw"}));
   }),
-  graphql.query(`${ process.env.CONTENTFUL_GRAPHQL_ENDPOINT }/explore?access_token=${ process.env.CDA_TOKEN }`, () => {
+  graphql.query(`SlugCollection`, (_, res, ctx) => {
     console.log('********** mocked PageFlexibleLander **********')
+    return res(ctx.data({slugCollection: {items: [{name: 'mock'}]}}))
   }),
 ]

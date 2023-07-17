@@ -13,7 +13,7 @@ const client = new ApolloClient({
 export async function loader({context, params, request}: LoaderArgs) {
   const restResult = await fetch("https://my-mock-api.com")
   const result = await client.query({query})
-  return json({graphQl: result.data, rest: restResult})
+  return json({graphQl: result?.data, rest: restResult})
 }
 
 export default function Index() {
